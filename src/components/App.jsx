@@ -1,9 +1,8 @@
-import {useState } from 'react';
+import { useState } from 'react';
 import FeedbackOptions from 'components/FeedbackOptions/FeedbackOptions';
 import Statistics from 'components/Statistics/Statistics';
 import Notification from 'components/Notification/Notification';
 import Section from 'components/Section/Section';
-
 
 export const App = () =>{
   
@@ -26,11 +25,10 @@ export const App = () =>{
       setBad(bad + 1);
       console.log("Bad", bad);
       }
+      countTotalFeedback();
   }
   const countTotalFeedback = () => { 
-    // const { good, neutral, bad } = setState( good, neutral, bad);
     const total = good + neutral + bad;
-    console.log(total);
     return total;
   }
 
@@ -41,16 +39,13 @@ export const App = () =>{
     return (
       <div>
         <Section title="Please leave your feedback here">
-        <FeedbackOptions options={{good, neutral, bad}} onLeaveFeedback={onLeaveFeedback} />
+        <FeedbackOptions options={[`good`, `neutral`, `bad`]} onLeaveFeedback={onLeaveFeedback} />
         {countTotalFeedback() <= 0 && (<Notification message="There is no feedback" />)
         }
         </Section>
       
-        
-        
           {countTotalFeedback() > 0 && (<Section title="Statistics">
           <Statistics good={good} neutral={neutral} bad={bad} total={countTotalFeedback()} positivePercentage={countPositivePercentage()} />
-        
           </Section>)}
       </div>
     )
